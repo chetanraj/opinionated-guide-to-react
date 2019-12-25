@@ -1,3 +1,5 @@
+## Table of Contents
+
 # The Book
 
 This Book is not supposed to ever serve as a teaching mechanism for react but more of a way to see react from the eyes of someone who has been using it for years and got sick of the "it depends".
@@ -213,3 +215,75 @@ There are many other types, but in general typing react components like these is
 I have very strong opinions on TypeScript as I think it creates a barrier for people to get into web development in a way as open and accessible as I did, and most of the times for no reason. I would say 50% or more of apps don't need TypeScript at all, more than 80% don't need TypeScript all over their pages and 100% don't need TypeScript in a marketing page with no state management.
 
 If you want your designer to make changes, add JSX, fix CSS and overall do some code, please avoid using TypeScript and it's not something that they need to learn and consider if you yourself need it when making an open source project or if it's creating a barrier of entrance for people who want to help.
+
+# Project Starters
+
+One of the main issues that existed when React started was that it was incredibly hard to get started, you had to mess with webpack and do a lot of really hard things just to get an hello world up and running.
+In the last couple of years that has gotten better we now have a lot of tools to help us get started writing React projects in no time but on the other hand we have so many and so good that sometimes its harder to know what starter to use.
+I will go through the three most used starters used right now to create different type of projects in react.
+
+## Create React App
+
+**Link: [https://create-react-app.dev/](https://create-react-app.dev/)**
+
+Create React App is the first and most famous one, its made and maintained by the React team themselves so you know all the choices are have the team stamp of approval.
+
+Without a doubt CRA (create react app short name) is the fastest way to get started and have some react code show up on your page but the main issue is that CRA is not very extensible as you don't have access to the webpack or even babel config so its a tradeoff you must know from the start as sometimes the only way to add something is to `eject` and that will leave you with _ALL_ the webpack config and no way to update your react scripts.
+
+Let's look at the pros and cons:
+
+Props:
+
+- Quick to get started
+- Supports most CSS preprocessors
+- Supports PWA
+- Easily updatable with new features
+- Support for SVG as React Components
+
+Cons:
+
+- Not a lot of flexibility when it comes to changing the way it handles file types
+- No Server Side render Support
+- No decisions from the react team in terms of app building so all the router, state management etc will be up to you.
+
+In my opinion create react app is a good starting point but if your application grows big enough it will also get out of hand and you will end up with a lot of webpack to handle either way.
+
+## Next
+
+**Link: [https://nextjs.org/](https://nextjs.org/)**
+
+Next is great, it comes prepared for a lot of things in your application, more than a starting point it's a guide to making server side rendered applications in react as that is supported out of the box and one of the biggest selling points of next.
+
+It also makes some decisions for you like routing and styling but gives you the room to make your own and even extend their scripts by changing the babel configuration to support more things you may need.
+
+Let's say you don't want to use their styled options but prefer to use styled components, in that case you can extend the babel config by adding the plugin like in a new `.babelrc` file
+
+```json
+{
+  "presets": ["next/babel"],
+  "plugins": ["babel-plugin-styled-components"]
+}
+```
+
+Make sure to leave the `next/babel` plugin as that adds a lot of functionality and a lot of babel presets and plugins you can read more about it [here](https://nextjs.org/docs#customizing-babel-config).
+
+A big advantage of next is also that it has a simple way to get started with the cli, to make a new project you can simply run:
+
+```sh
+npx create-next-app
+```
+
+So let's look at the pros and cons of next in my opinion:
+
+Pros:
+
+- Server side render support
+- Amazing docs with lessons to follow
+- Production grade
+- Customizing options
+
+Cons:
+
+- Steep learning curve, mostly for being SSR things are just harder.
+-
+- **ZEIT PROPAGANDA ASK IVES ABOUT ZEIT NEXT THING**
