@@ -269,7 +269,7 @@ Make sure to leave the `next/babel` plugin as that adds a lot of functionality a
 
 A big advantage of next is also that it has a simple way to get started with the cli, to make a new project you can simply run:
 
-```sh
+```
 npx create-next-app
 ```
 

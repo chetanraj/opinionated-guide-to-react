@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import unified from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import toc from "remark-toc";
-import github from "remark-github";
 import rehype2react from "rehype-react";
 import slug from "remark-slug";
 import rehypePrism from "@mapbox/rehype-prism";
@@ -26,17 +25,18 @@ const BlogIndex = ({ data, location }) => {
         .use(toc)
         .use(remark2rehype)
         .use(rehypePrism)
-        .use(github, { repository: "rehypejs/rehype-react" })
         .use(rehype2react, { createElement: React.createElement })
-        .process(markdownBook.rawMarkdownBody, function(err, file) {
+        .process(markdownBook.rawMarkdownBody, (err, file) => {
+          console.log(err);
           setBook(file);
         });
     }
-  }, []);
+  }, [markdownBook]);
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Opinionated guide to React" />
-      {book.contents}
+      {book && book.contents}
     </Layout>
   );
 };
