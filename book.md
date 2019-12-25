@@ -285,5 +285,9 @@ Pros:
 Cons:
 
 - Steep learning curve, mostly for being SSR things are just harder.
--
+- Harder to leave if it the `next` is not the best for your project
 - **ZEIT PROPAGANDA ASK IVES ABOUT ZEIT NEXT THING**
+
+## Gatsby
+
+**Link: [https://nextjs.org/](https://nextjs.org/)**
