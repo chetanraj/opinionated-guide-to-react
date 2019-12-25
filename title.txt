@@ -1,0 +1,10 @@
+---
+title: Opinionated Guide to React
+subtitle: It Depends
+author: Sara Vieira
+subject: "markdown"
+keywords: [books,programming.react]
+language: en-US
+toc-own-page: true
+titlepage: true
+---
