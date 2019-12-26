@@ -269,7 +269,7 @@ Make sure to leave the `next/babel` plugin as that adds a lot of functionality a
 
 A big advantage of next is also that it has a simple way to get started with the cli, to make a new project you can simply run:
 
-```
+```bash
 npx create-next-app
 ```
 
@@ -290,4 +290,102 @@ Cons:
 
 ## Gatsby
 
-**Link: [https://nextjs.org/](https://nextjs.org/)**
+**Link: [https://www.gatsbyjs.org/](https://www.gatsbyjs.org/)**
+
+I'll be honest, gatsby is basically my create react app, its what I use for basically everything, even the website for this book is made in gatsby just because.
+
+Gatsby started a project by Kyle Mathews to create blogs but it grew into so much more and now it's a VC backed company and the product is way more than a blog creator, you can pull data from anywhere to make static sites.
+
+You may ask what is so good about static sites? One of the main benefits is without a doubt the SEO, the app is HTML so everything gets read by google to better rank your site, another big benefit is the deployment, static HTML sites are waaaaay easier to deploy than server side applications.
+
+Getting started is also quite easy as `gatsby` also has a CLI:
+
+```bash
+npx gatsby new gatsby-site
+```
+
+This will give you a new site with the [default template](https://github.com/gatsbyjs/gatsby-starter-default), this one comes with some plugins and also two pages so you can get an idea how the routing works inside of gatsby.
+
+The main strength of gatsby is to be able to source from basically anywhere and create HTML files from it with GraphQL so it is needed to know some GraphQL in order to get a full grasp of it's potential.
+
+Let's start with a simple example using a plugin that will get data from [https://randomuser.me/](https://randomuser.me/) and display it in our page.
+
+First installing the plugin:
+
+```bash
+yarn add gatsby-source-randomuser
+```
+
+Now that we installed the plugin we have to add to our list of plugins that is located on our `gatsby-config.js`, in there we can add the plugin and tell it to get 25 people:
+
+```json
+{
+  resolve: "gatsby-source-randomuser",
+  options: {
+    results: 25,
+  },
+},
+```
+
+Now that we have this our site can be fed this date from GraphQL and to do this we need to add a query to our index page:
+
+```js
+export const Query = graphql`
+  query Users {
+    allRandomUser {
+      edges {
+        node {
+          id
+          name {
+            first
+            last
+          }
+          picture {
+            thumbnail
+          }
+        }
+      }
+    }
+  }
+`;
+```
+
+If you want to test this query and all of the graphql things you will do you do that at `http://localhost:8000/___graphql` , this will give you a graphql playground to test your queries.
+
+After this is done we can now pass this data to our component and render our humans:
+
+```jsx
+const IndexPage = ({ data }) => (
+  <Layout>
+    <SEO title="Home" />
+    <h1>Hi peeps :wave:</h1>
+    <ul>
+      {data.allRandomUser.edges.map(({ node }) => (
+        <li>
+          <img src={node.picture.thumbnail} alt={node.name.first} />
+          {node.name.first} {node.name.last}
+        </li>
+      ))}
+    </ul>
+  </Layout>
+);
+```
+
+There is waaay more you can do with this example, including creating a page for every user but as an example of the power I feel we leave in a good spot.
+For the code and preview you can go to [CodeSandbox](https://codesandbox.io/s/gatsby-random-people-m7woc).
+
+Now that you have an idea how much I like gatsby let's go over some pros and cons of using it.
+
+Pros:
+
+- Amazing documentation
+- Flexibility to tweak gatsby internals to your needs
+- Export to HTML
+- Amazing community and team behind it
+- Focus on performance and accessability
+
+Cons:
+
+- Steep learning curve for any advanced things
+- Knowledge of GraphQL required to get started
+- Not everything can be static
