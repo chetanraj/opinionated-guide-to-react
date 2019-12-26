@@ -566,6 +566,14 @@ We created a bunch of functionality in 27 lines. I think that's where Reach Rout
 
 **Winner: [Overmind](https://www.overmindjs.org/)**
 
+At [CodeSandbox](https://codesandbox.io) we have been using Overmind for a while and even before that we were using it's predecessor `Cerebral`. It is honestly a breath of fresh air when it comes to state management, it's simple but super powerful and super extendible to be able to be used in big applications with minimal boilerplate.
+
+Beware that it is a mutable state management option and if this is a no go for you I am sorry but you should take a look as it definitely doesn't make your app slower or harder to follow. It also has complete typescript support as in all your state gets typed automatically and as someone who has her doubts about typescript even I can say it's amazing.
+
+
+
+[Link to CodeSandbox](https://codesandbox.io/s/overmind-example-v6plk)
+
 ## Animation
 
 **Winner: [Framer Motion](https://www.framer.com/motion/)**
