@@ -389,3 +389,175 @@ Cons:
 - Steep learning curve for any advanced things
 - Knowledge of GraphQL required to get started
 - Not everything can be static
+
+# Packages
+
+If you want something there is almost certainly a react package for that and in my opinion that is both a strength and a downfall when combined with the fact that react itself only provides your with a view layer and the rest is supposed to be figured out by yourself.
+
+You may ask how I can see this as a downfall since the fact that there are so many packages and people out there making tools should only be an advantage? It is an advantage when there is direction and recommended ways, something React refuses to create so to anyone getting started it all looks like a sea of sameness. This part is a bit for people who feel the same way, like searching for a router is like going into a voyage.
+Here I will go through the packages I use for some parts of an app and how to use the basics of them so that you can take everything I say and then make a formed decision if you will use the same thing or continue on the quest.
+
+Let's start.
+
+# Routing
+
+**Winner: [Reach Router](https://reach.tech/router)**
+
+For years I used React Router, the syntax and some API choices weren't really my type of coffee but it was the most used and supported so I kept using it until Reach Router came around that got all the little things I didn't really like about React Router and made them go away.
+
+First thing I like is how to define routes, it gets rid of the `Route` component replacing it with the actual component handling that like so:
+
+```jsx
+import { render } from "react-dom";
+import React from "react";
+import { Router, Link } from "@reach/router";
+
+let Home = () => <div>Home</div>;
+let User = () => <div>User</div>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <User path="user/:id" />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+Now let's say you wanna get that user id to fetch from database or from an api, you can just get it from the direct props instead of getting inside objects of objects:
+
+```jsx
+import { render } from "react-dom";
+import React from "react";
+import { Router, Link } from "@reach/router";
+
+let Home = () => <div>Home</div>;
+let User = ({ id }) => <div>User: {id}</div>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <User path="user/:id" />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+Adding links is also has a pretty good user Developer experience
+:
+
+```jsx
+import { render } from "react-dom";
+import React from "react";
+import { Router, Link } from "@reach/router";
+
+const Home = () => (
+  <div>
+    <Link to="/user/random">Go to Random user</Link>
+  </div>
+);
+const User = ({ id }) => <div>User: {id}</div>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <User path="user/:id" />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+<!--
+Nested routes also work like React components, as if you want a route to be the child of one you can simply place it inside the parent route like so:
+
+```jsx
+import { render } from "react-dom";
+import React from "react";
+import { Router, Link } from "@reach/router";
+
+const Home = () => (
+  <div>
+    <Link to="user/random">Go to Random user</Link>
+  </div>
+);
+const Users = () => <div>Nothing to see here</div>;
+const User = ({ id }) => <div>User: {id}</div>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <Users path="user/">
+      <User path="/id/:id" />
+    </Users>
+  </Router>,
+  document.getElementById("root")
+);
+``` -->
+
+One thing that really took me to Reach Router was the `navigate` function, this simple but powerful functions allows you navigate somewhere in your app without complication or components like so:
+
+```jsx
+import { render } from "react-dom";
+import React, { useState } from "react";
+import { Router, Link, navigate } from "@reach/router";
+
+const Home = () => {
+  const [user, setUser] = useState("");
+  return (
+    <div>
+      <Link to="user/random">Go to Random user</Link>
+      <input value={user} onChange={e => setUser(e.target.value)} />
+      <button disabled={!user} onClick={() => navigate(`/user/${user}`)}>
+        Go to that user
+      </button>
+    </div>
+  );
+};
+const User = ({ id }) => <div>User: {id}</div>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <User path="user/:id" />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+As soon as you fill in the input and also click the button you will be redirected to the new page with the value typed with no fuss.
+
+Let's finish our "app" by adding a a 404 page so that our user can know he got lost:
+
+```jsx
+import { render } from "react-dom";
+import React, { useState } from "react";
+import { Router, Link, navigate } from "@reach/router";
+
+const Home = () => {
+  const [user, setUser] = useState("");
+  return (
+    <div>
+      <Link to="user/random">Go to Random user</Link>
+      <input value={user} onChange={e => setUser(e.target.value)} />
+      <button disabled={!user} onClick={() => navigate(`/user/${user}`)}>
+        Go to that user
+      </button>
+    </div>
+  );
+};
+const User = ({ id }) => <div>User: {id}</div>;
+const NotFound = () => <p>Sorry, nothing here</p>;
+
+render(
+  <Router>
+    <Home path="/" />
+    <User path="user/:id" />
+    <NotFound default />
+  </Router>,
+  document.getElementById("root")
+);
+```
+
+We created a bunch of functionality in 27 lines. I think that's where Reach Router shines, it's simple experience as a developer and it's way of making himself more and more robust if needed.
+
+[Link to CodeSandbox](https://codesandbox.io/s/keen-shadow-4uh2u)
