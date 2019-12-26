@@ -399,7 +399,7 @@ Here I will go through the packages I use for some parts of an app and how to us
 
 Let's start.
 
-# Routing
+## Routing
 
 **Winner: [Reach Router](https://reach.tech/router)**
 
@@ -561,3 +561,15 @@ render(
 We created a bunch of functionality in 27 lines. I think that's where Reach Router shines, it's simple experience as a developer and it's way of making himself more and more robust if needed.
 
 [Link to CodeSandbox](https://codesandbox.io/s/keen-shadow-4uh2u)
+
+## State Management
+
+**Winner: [Overmind](https://www.overmindjs.org/)**
+
+## Animation
+
+**Winner: [Framer Motion](https://www.framer.com/motion/)**
+
+## Styling
+
+**Winner: [Styled Components](https://www.styled-components.com/)**
