@@ -232,7 +232,7 @@ Without a doubt, CRA (create react app short name) is the fastest way to get sta
 
 Let's look at the pros and cons:
 
-Props:
+Pros:
 
 - Quick to get started
 - Supports most CSS preprocessors
